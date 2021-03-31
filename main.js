@@ -1,122 +1,112 @@
-// if (document.readyState == 'loading') {
-//     document.addEventListener('DOMContentLoaded', ready)
-// } else {
-//     ready()
-// }
-// function ready() {
+// Used the following tutorials to help develop the cart updates
+// https://www.youtube.com/watch?v=YeFzkC2awTM
+// https://www.youtube.com/watch?v=PoTGs38DR9E
+// Used this for modals: https://www.w3schools.com/howto/howto_css_modals.asp
 
-// }
-
-
-var glazes = document.getElementsByClassName('glaze-card')
-console.log(glazes);
-for (var i = 0; i < glazes.length; i++) {
-    var glaze = glazes[i]
-    glaze.addEventListener('click', function(event) {
-        var clicked = event.target
-        if (clicked.tagName != 'DIV') {
-            clicked = clicked.parentElement
-        }
-        // console.log(clicked)
-        // var unselect = document.getElementsByClassName('glaze-selected')
-        // for (var j = 0; j < unselect.length; j++) {
-        //     un = unselect[j]
-        //     un.classList.remove("glaze-selected")
-        // }
-        // clicked.classList.add("glaze-selected")
-        // console.log(clicked)
-
-        var unselect = document.getElementById('glaze-selected')
-        if (unselect != null) {
-            unselect.removeAttribute('id')
-        }
-        clicked.id = "glaze-selected"
-
-        let amount = document.getElementById('amount-selected')
-        if (amount) {
-            document.getElementById('bag').id = "bag-clickable"
-            activateBag()
-        }
-
-    })
+// make sure doc is loaded before loading javascript
+if (document.readyState == 'loading') {
+    document.addEventListener('DOMContentLoaded', ready)
+} else {
+    ready()
 }
 
-var amounts = document.getElementsByClassName('amount-card')
-for (var i = 0; i < amounts.length; i++) {
-    var amount = amounts[i]
-    amount.addEventListener('click', function(event) {
-        var clicked = event.target
-        if (clicked.tagName != 'DIV') {
-            clicked = clicked.parentElement
-        }
-        // console.log(clicked)
-        // var unselect = document.getElementsByClassName('amount-selected')
-        // for (var j = 0; j < unselect.length; j++) {
-        //     un = unselect[j]
-        //     un.classList.remove("amount-selected")
-        // }
-        // clicked.classList.add("amount-selected")
-        // console.log(clicked)
+function ready() {
+    // tracks selected glaze and changes card color to hover color
+    var glazes = document.getElementsByClassName('glaze-card')
+    for (var i = 0; i < glazes.length; i++) {
+        var glaze = glazes[i]
+        glaze.addEventListener('click', function(event) {
+            var clicked = event.target
+            // make sure entire card changes color
+            if (clicked.tagName != 'DIV') {
+                clicked = clicked.parentElement
+            }
 
-        var unselect = document.getElementById('amount-selected')
-        if (unselect != null) {
-            unselect.removeAttribute('id')
-        }
-        clicked.id = "amount-selected"
+            // revert card color if deselected
+            var unselect = document.getElementById('glaze-selected')
+            if (unselect != null) {
+                unselect.removeAttribute('id')
+            }
 
-        let glaze = document.getElementById('glaze-selected')
-        if (glaze) {
-            document.getElementById('bag').id = "bag-clickable"
-            activateBag()
-        }
-    })
+            // set glaze to selected color
+            clicked.id = 'glaze-selected'
+
+            // checks if "add to bag" should be clickable
+            let amount = document.getElementById('amount-selected')
+            if (amount) {
+                document.getElementById('bag').id = 'bag-clickable'
+                activateBag()
+            }
+        })
+    }
+
+    // tracks selected amount and changes card color to hover color
+    var amounts = document.getElementsByClassName('amount-card')
+    for (var i = 0; i < amounts.length; i++) {
+        var amount = amounts[i]
+        amount.addEventListener('click', function(event) {
+            var clicked = event.target
+            // make sure entire card changes color
+            if (clicked.tagName != 'DIV') {
+                clicked = clicked.parentElement
+            }
+
+            // revert card color if deselected
+            var unselect = document.getElementById('amount-selected')
+            if (unselect != null) {
+                unselect.removeAttribute('id')
+            }
+
+            // set amount to selected color
+            clicked.id = 'amount-selected'
+
+            // checks if "add to bag" should be clickable
+            let glaze = document.getElementById('glaze-selected')
+            if (glaze) {
+                document.getElementById('bag').id = 'bag-clickable'
+                activateBag()
+            }
+        })
+    }
 }
 
+// sets bag to darker (selectable) color to indicate clickability
+// and activates modal
 function activateBag() {
     var addBag = document.getElementById('bag-clickable')
     addBag.addEventListener('click', function(event) {
         bagAmount();
     })
 
-    // Get the modal
-    var modal = document.getElementById("modal");
+    // code for modal
+    var modal = document.getElementById('modal');
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("bag-clickable");
+    // button that opens the modal
+    var btn = document.getElementById('bag-clickable');
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
+    // open the modal if button hit
     btn.onclick = function() {
-    modal.style.display = "block";
-    let glaze = document.getElementById('glaze-selected').children[1].textContent
-    let amount = document.getElementById('amount-selected').children[0].textContent
-    let type = document.getElementById('type').textContent
-        console.log(`x${amount} ${type}, ${glaze}`)
-    document.getElementById('m-description').textContent = `x${amount} ${type}, ${glaze}`
+        modal.style.display = 'block';
 
+        // custom text to display product details on modal
+        let glaze = document.getElementById('glaze-selected').children[1].textContent
+        let amount = document.getElementById('amount-selected').children[0].textContent
+        let type = document.getElementById('type').textContent
+        document.getElementById('m-description').textContent = `x${amount} ${type}, ${glaze}`
     }
 
-    // When the user clicks anywhere outside of the modal, close it
+    // clicks anywhere outside of the modal closes and resets page
     window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        document.getElementById('glaze-selected').removeAttribute('id')
-        document.getElementById('amount-selected').removeAttribute('id')
-        document.getElementById('bag-clickable').removeAttribute('id')
-    }
-    }
-}
-
-
-function onLoadBag() {
-    let amount = localStorage.getItem('bagAmount')
-    if (amount) {
-        document.getElementById('bag-val').textContent = amount
+        if (event.target == modal) {
+            modal.style.display = 'none';
+            document.getElementById('glaze-selected').removeAttribute('id')
+            document.getElementById('amount-selected').removeAttribute('id')
+            document.getElementById('bag-clickable').removeAttribute('id')
+        }
     }
 }
 
+// updates bag amount display when adding products to bag
 function bagAmount() {
     let amount = localStorage.getItem('bagAmount')
     amount = parseInt(amount)
@@ -133,4 +123,11 @@ function bagAmount() {
     }
 }
 
+// check local storage upon loading to make sure bag count is accurate
+function onLoadBag() {
+    let amount = localStorage.getItem('bagAmount')
+    if (amount) {
+        document.getElementById('bag-val').textContent = amount
+    }
+}
 onLoadBag()
