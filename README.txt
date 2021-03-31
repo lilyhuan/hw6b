@@ -1,1 +1,4 @@
-I created an extra product page for the blackberry cinnamon roll. I also developed the "About" page and "Menu" page.
+I submitted this assignment on 3/31.
+
+The javascript allows selected details to stay selected. Once every required selection is selected, the "add to bag" button changes color and becomes clickable. 
+Javascript is also used for the modal.
