@@ -1,0 +1,334 @@
+/* External Resources
+https://www.codecademy.com/learn/learn-css
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+https://www.w3schools.com/ */
+
+/* CSS is organized by page section. Within in each page section,
+it is ordered from top of HTML to bottom of HTML page. The declerations
+are organized in alphabetical order.*/
+
+body {
+  font-family: "Bellota", cursive;
+  margin: 0;
+}
+
+/* Nav Bar and Logo */
+.logo {
+  align-items: center;
+  display: inline;
+  justify-content: center;
+}
+
+.logo img {
+  display: block;
+  margin: auto;
+}
+
+.logo h1 {
+  align-items: center;
+}
+
+.nav {
+  background-color: #e1a97d;
+  list-style: none;
+  margin: 0;
+  padding: 1%;
+  text-align: center;
+}
+
+.nav li {
+  display: inline;
+}
+
+.nav a {
+  color: black;
+  font-weight: bold;
+  padding: 0 5%;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.nav-bag {
+  height: auto;
+  vertical-align: bottom;
+  width: 25px;
+}
+
+/* Home Page */
+.banner {
+  position: relative;
+  text-align: center;
+}
+
+.banner img {
+  height: 100%;
+  width: 100%;
+}
+
+.centered-button {
+  background-color: #e1a97d;
+  border-radius: 50px;
+  color: black;
+  font-size: 2rem;
+  font-weight: bold;
+  left: 50%;
+  padding: 2% 5%;
+  position: absolute;
+  text-decoration: none;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+/* Location and Hours */
+.locations {
+  margin: auto;
+  width: 1000px;
+}
+
+.directions {
+  align-items: baseline;
+  display: flex;
+  margin: 0;
+}
+
+.d-button {
+  background-color: #fff2e2;
+  border-radius: 50px;
+  margin: 0 0 0 40px;
+  padding: 10px;
+}
+
+.m0 {
+  margin: 0;
+}
+
+/* Menu Page */
+.button {
+  background-color: #fff2e2;
+  border-radius: 50px;
+  margin: auto;
+  padding: 20px;
+  width: fit-content;
+}
+
+/* Browse Page */
+.browse-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: auto;
+  width: 1000px;
+}
+
+.centered {
+  text-align: center;
+}
+
+/* Card */
+.card-container {
+  background-color: #fff2e2;
+  display: inline-flex;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin: 30px 0;
+  width: 350px;
+}
+
+.card-container:hover {
+  background-color: #e1a97d;
+}
+
+.card-content {
+  margin: auto;
+  padding: 0 50px;
+}
+
+.arrow {
+  object-fit: contain;
+  padding-right: 50px;
+}
+
+/* Details Page */
+.detail-container {
+  margin: auto;
+  max-width: 1000px;
+}
+
+.info-container {
+  display: inline-flex;
+  margin: 20px auto;
+  width: 1000px;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px;
+}
+
+.glaze-container {
+  display: flex;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.glaze-card {
+  background-color: #fff2e2;
+  display: flex;
+  margin: 20px 0;
+  text-align: center;
+  width: 45%;
+}
+
+.glaze-card:hover {
+  background-color: #e1a97d;
+}
+
+.glaze-card p {
+  margin: 25px 0 0 50px;
+}
+
+#glaze-selected {
+  background-color: #e1a97d;
+}
+
+.amount-container {
+  display: flex;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.amount-card {
+  background-color: #fff2e2;
+  margin: 20px 0;
+  text-align: center;
+  width: 20%;
+}
+
+.amount-card:hover {
+  background-color: #e1a97d;
+}
+
+#amount-selected {
+  background-color: #e1a97d;
+}
+
+.bag-container {
+  background-color: #fff2e2;
+  display: flex;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  justify-content: center;
+  margin: auto;
+  margin: 20px 0;
+  width: 1000px;
+}
+
+.bag-container img {
+  margin-right: 10px;
+  object-fit: contain;
+}
+
+#bag-clickable {
+  background-color: #e1a97d;
+}
+
+/* About Page */
+.about-wrapper {
+  margin: 50px auto;
+  max-width: 1000px;
+}
+
+.about-container {
+  display: flex;
+}
+
+.about-container p {
+  margin-right: 20px;
+}
+
+/* Cart Page */
+.cart-container {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: auto;
+  width: 1000px;
+}
+
+.order-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-card-container {
+  background-color: #fff2e2;
+  display: inline-flex;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin: 15px 0;
+  width: 500px;
+}
+
+.cart-card-content {
+  margin: 10 auto;
+  padding: 0px 15px;
+}
+
+.v-card-container {
+  /* background-color: #fff2e2;
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin: 15px 0;
+  width: 300px; */
+  background-color: #fff2e2;
+  display: grid;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  grid-template-areas:
+    "header header"
+    "item amount"
+    "checkout checkout";
+  margin: 15px 0;
+
+  width: 300px;
+  padding: 20px;
+}
+
+.order {
+  display: header;
+}
+
+.item {
+  grid-area: item;
+  list-style: none;
+  padding-left: 0;
+}
+
+.amount {
+  grid-area: amount;
+  list-style: none;
+  padding-left: 0;
+}
+
+.checkout {
+  grid-area: checkout;
+}
+
+.o-button {
+  background-color: #e1a97d;
+  border-radius: 50px;
+  margin: auto;
+  padding: 20px;
+  width: 80%;
+}

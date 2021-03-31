@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bellota:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" async></script>
+    <title>Bun Bun Bakery - Original</title>
+  </head>
+  <body>
+    <!-- Logo -->
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/logo.png" alt="bunbun logo" />
+      </a>
+    </div>
+
+    <!-- Nav Bar -->
+    <div class="nav-container">
+      <ul class="nav">
+        <li>
+          <a href="about.html">About</a>
+        </li>
+        <li>
+          <a href="menu.html">Menu</a>
+        </li>
+        <li><a href="index.html#locations">Locations</a></li>
+        <li>
+          <a href="browse.html">Order Now</a>
+          <a href="cart.html"
+            ><img src="assets/bag.png" alt="bag icon" class="nav-bag" /><span
+              id="bag-val"
+              >0</span
+            ></a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Page Content - Original Roll Details -->
+    <div class="detail-container">
+      <a href="browse.html"><p>&lt; Go Back</p></a>
+      <!-- About the Product -->
+      <div class="info-container">
+        <img src="assets/original-l.png" alt="original cinnamon roll" />
+        <div class="info-text">
+          <h3>Original</h3>
+          <p>$4.99</p>
+          <p>
+            Fluffy cinnamon roll filled with fragrant cinnamon, our most popular
+            choice!
+          </p>
+        </div>
+      </div>
+
+      <!-- Glaze Selection -->
+      <h2>Select your glaze:</h2>
+      <div class="glaze-container">
+        <div class="glaze-card">
+          <img src="assets/noglaze.png" alt="no glaze" />
+          <p>None</p>
+        </div>
+        <div class="glaze-card">
+          <img src="assets/vanilla.png" alt="vanilla milk glaze" />
+          <p>Vanilla Milk</p>
+        </div>
+        <div class="glaze-card">
+          <img src="assets/sugar.png" alt="sugar milk glaze" />
+          <p>Sugar Milk</p>
+        </div>
+        <div class="glaze-card">
+          <img src="assets/chocolate.png" alt="double chocolate glaze" />
+          <p>Double Chocolate</p>
+        </div>
+      </div>
+
+      <!-- Amount Selection -->
+      <h2>Select amount:</h2>
+      <div class="amount-container">
+        <div class="amount-card">
+          <h4>1</h4>
+        </div>
+        <div class="amount-card"><h4>3</h4></div>
+        <div class="amount-card">
+          <h4>6</h4>
+        </div>
+        <div class="amount-card">
+          <h4>12</h4>
+        </div>
+      </div>
+
+      <!-- Add to Bag -->
+      <div class="bag-container" id="bag">
+        <img src="assets/bag.png" alt="bag icon" />
+        <h2 class="bag">Add to bag</h2>
+      </div>
+    </div>
+  </body>
+</html>

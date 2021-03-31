@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bellota:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" async></script>
+
+    <title>Bun Bun Bakery</title>
+  </head>
+  <body>
+    <!-- Logo -->
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/logo.png" alt="bunbun_logo" />
+      </a>
+    </div>
+
+    <!-- Nav Bar -->
+    <div class="nav-container">
+      <ul class="nav">
+        <li>
+          <a href="about.html">About</a>
+        </li>
+        <li>
+          <a href="menu.html">Menu</a>
+        </li>
+        <li><a href="index.html#locations">Locations</a></li>
+        <li>
+          <a href="browse.html">Order Now</a>
+          <a href="cart.html"
+            ><img src="assets/bag.png" alt="bag icon" class="nav-bag" /><span
+              id="bag-val"
+              >0</span
+            ></a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Order History -->
+    <div class="cart-container">
+      <div class="order-container">
+        <div class="cart-card-container">
+          <img src="assets/original.png" alt="original roll" />
+          <div class="cart-card-content">
+            <h3>Original, Sugar Milk</h3>
+            <p>$4.99</p>
+
+            <label for="amount"></label>
+
+            <select name="amount" id="amount">
+              <option value="1">1</option>
+              <option value="3">3</option>
+              <option value="6">6</option>
+              <option value="12">12</option>
+            </select>
+            <br />
+          </div>
+        </div>
+
+        <div class="cart-card-container">
+          <img src="assets/original.png" alt="original roll" />
+          <div class="cart-card-content">
+            <h3>Original, Vanilla Milk</h3>
+            <p>$4.99</p>
+
+            <label for="amount"></label>
+
+            <select name="amount" id="amount">
+              <option value="1">1</option>
+              <option value="3">3</option>
+              <option value="6">6</option>
+              <option value="12">12</option>
+            </select>
+            <br />
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="v-card-container">
+        <h3 class="order">Order Summary</h3>
+        <ul class="item">
+          <li>Rolls</li>
+          <li>Delivery</li>
+          <li>Tax</li>
+          <hr />
+          <li>Subtotal</li>
+        </ul>
+        <ul class="amount">
+          <li>$9.98</li>
+          <li>$3</li>
+          <li>$1</li>
+          <hr />
+          <li>$13.98</li>
+        </ul>
+        <h3 class="centered o-button checkout">Checkout</h3>
+      </div>
+    </div>
+  </body>
+</html>
