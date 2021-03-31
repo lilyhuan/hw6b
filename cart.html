@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="main.js" async></script>
 
-    <title>Bun Bun Bakery</title>
+    <title>Bag Checkout</title>
   </head>
   <body>
     <!-- Logo -->
@@ -44,18 +44,20 @@
       </ul>
     </div>
 
-    <!-- Order History -->
+    <!-- Orders -->
+    <h1 class="cart-heading">My bag</h1>
     <div class="cart-container">
       <div class="order-container">
         <div class="cart-card-container">
           <img src="assets/original.png" alt="original roll" />
+
           <div class="cart-card-content">
             <h3>Original, Sugar Milk</h3>
             <p>$4.99</p>
 
-            <label for="amount"></label>
+            <label for="amount1"></label>
 
-            <select name="amount" id="amount">
+            <select name="amount1" id="amount1">
               <option value="1">1</option>
               <option value="3">3</option>
               <option value="6">6</option>
@@ -63,6 +65,7 @@
             </select>
             <br />
           </div>
+          <span class="delete">&times;</span>
         </div>
 
         <div class="cart-card-container">
@@ -71,9 +74,9 @@
             <h3>Original, Vanilla Milk</h3>
             <p>$4.99</p>
 
-            <label for="amount"></label>
+            <label for="amount2"></label>
 
-            <select name="amount" id="amount">
+            <select name="amount2" id="amount2">
               <option value="1">1</option>
               <option value="3">3</option>
               <option value="6">6</option>
@@ -81,6 +84,7 @@
             </select>
             <br />
           </div>
+          <span class="delete">&times;</span>
         </div>
       </div>
 
@@ -91,14 +95,14 @@
           <li>Rolls</li>
           <li>Delivery</li>
           <li>Tax</li>
-          <hr />
+          <li><hr /></li>
           <li>Subtotal</li>
         </ul>
         <ul class="amount">
           <li>$9.98</li>
           <li>$3</li>
           <li>$1</li>
-          <hr />
+          <li><hr /></li>
           <li>$13.98</li>
         </ul>
         <h3 class="centered c-button checkout">Checkout</h3>
