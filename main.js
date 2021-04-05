@@ -213,11 +213,15 @@ function displayBag() {
                 }
                 console.log(opts)
         })
-        removeItem()
+        Object.keys(bagItems).map((itemName, index) => {
+            removeItem2(itemName, index, bagItems)
+
+        })
+        // removeItem(bagItems)
     }
 }
 
-function removeItem() {
+function removeItem(bagItems) {
     let remove = document.getElementsByClassName('delete')
     for (var i = 0; i < remove.length; i++) {
         var btn = remove[i]
@@ -225,8 +229,27 @@ function removeItem() {
             var btnClicked = event.target
             btnClicked.parentElement.remove()
             // localStorage.removeItem()
+            console.log(bagItems)
         })
     }
+}
+
+function removeItem2(itemName, i, bagItems) {
+    let remove = document.getElementsByClassName('delete')
+        var btn = remove[i]
+        btn.addEventListener('click', function(event) {
+            var btnClicked = event.target
+            btnClicked.parentElement.remove()
+            // localStorage.removeItem(itemName)
+            // console.log(localStorage.getItem(`${itemName}`))
+            // console.log(typeof(itemName))
+            // console.log(localStorage.getItem('Original3'))
+            // console.log(bagItems)
+            delete bagItems[itemName]
+            // console.log(bagItems)
+            localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
+        })
+    
 }
 
 displayBag()
