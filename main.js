@@ -70,12 +70,41 @@ function ready() {
     }
 }
 
+// get item details
+function itemDetails() {
+    let glaze = document.getElementById('glaze-selected').children[1].textContent
+    let amount = document.getElementById('amount-selected').children[0].textContent
+    let type = document.getElementById('type').textContent
+
+    let item = {"glaze":glaze, "amount":amount, "type": type}
+    return item
+}
+
+function addItemToBag(item) {
+    let bagItems = JSON.parse(localStorage.getItem('itemsInCart'))
+    
+    if(bagItems != null) {
+        let total = Object.keys(bagItems).length
+        itemName = item.type + total
+        bagItems = {
+            ...bagItems,
+            [itemName]: item
+        }
+    } else {
+        bagItems = { [item.type]: item }
+    }
+    localStorage.setItem("itemsInCart", JSON.stringify(bagItems))
+}
+
+
 // sets bag to darker (selectable) color to indicate clickability
 // and activates modal
 function activateBag() {
     var addBag = document.getElementById('bag-clickable')
     addBag.addEventListener('click', function(event) {
         bagAmount();
+        let item = itemDetails()
+        addItemToBag(item)
     })
 
     // code for modal
@@ -89,10 +118,8 @@ function activateBag() {
         modal.style.display = 'block';
 
         // custom text to display product details on modal
-        let glaze = document.getElementById('glaze-selected').children[1].textContent
-        let amount = document.getElementById('amount-selected').children[0].textContent
-        let type = document.getElementById('type').textContent
-        document.getElementById('m-description').textContent = `x${amount} ${type}, ${glaze}`
+        let item = itemDetails()
+        document.getElementById('m-description').textContent = `x${item.amount} ${item.type}, ${item.glaze}`
     }
 
     // clicks anywhere outside of the modal closes and resets page
@@ -131,3 +158,10 @@ function onLoadBag() {
     }
 }
 onLoadBag()
+
+
+
+// Cart page
+function displayBag() {
+    let bagItems = localStorage.getItems()
+}
