@@ -81,7 +81,7 @@ function itemDetails() {
 }
 
 function addItemToBag(item) {
-    let bagItems = JSON.parse(localStorage.getItem('itemsInCart'))
+    let bagItems = JSON.parse(localStorage.getItem('itemsInBag'))
     
     if(bagItems != null) {
         let total = Object.keys(bagItems).length
@@ -93,7 +93,7 @@ function addItemToBag(item) {
     } else {
         bagItems = { [item.type]: item }
     }
-    localStorage.setItem("itemsInCart", JSON.stringify(bagItems))
+    localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
 }
 
 
@@ -163,5 +163,70 @@ onLoadBag()
 
 // Cart page
 function displayBag() {
-    let bagItems = localStorage.getItems()
+    let bagItems = JSON.parse(localStorage.getItem('itemsInBag'))
+
+    // check if on bag page
+    let cartContainer = document.querySelector(".order-container")
+
+    if (bagItems && cartContainer) {
+        Object.values(bagItems).map((item, index) => {
+    //         var options = {"1":"<option value='1'>1</option>",
+    // "3": "<option value='3'>3</option>",
+    // "6":"<option value='6'>6</option>",
+    // "12": "<option value='12'>12</option>"}
+            // let amount = item.amount
+            // options[amount] = `<option value='${amount}' selected="selected">${amount}</option>`
+            // console.log(options)
+            cartContainer.innerHTML += `
+            <div class="cart-card-container">
+                <img src="assets/${item.type}.png" alt="${item.type}" />
+
+                 <div class="cart-card-content">
+                    <h3>${item.type}, ${item.glaze}</h3>
+                    <p>$4.99</p>
+
+                    <label for="amount${index}"></label>
+
+                    <select name="amount${index}" id="amount${index}">
+                        <option value="1">1</option>
+                        <option value="3">3</option>
+                        <option value="6">6</option>
+                        <option value="12">12</option>
+                    </select>
+                    <br />
+                </div>
+             <span class="delete">&times;</span>
+            </div>
+            `
+            // console.log(id)
+            // console.log(document.querySelector(`option[value="${item.amount}"]`))
+            // document.querySelector(`option[value="${item.amount}"]`)
+        })
+
+        Object.values(bagItems).map((item, index) => {
+            let sel = document.getElementById(`amount${index}`)
+                let opts = sel.options
+                for (var opt, i = 0; opt = opts[i]; i++) {
+                    if (opt.value == item.amount) {
+                        opts.selectedIndex = i;
+                    }
+                }
+                console.log(opts)
+        })
+        removeItem()
+    }
 }
+
+function removeItem() {
+    let remove = document.getElementsByClassName('delete')
+    for (var i = 0; i < remove.length; i++) {
+        var btn = remove[i]
+        btn.addEventListener('click', function(event) {
+            var btnClicked = event.target
+            btnClicked.parentElement.remove()
+            // localStorage.removeItem()
+        })
+    }
+}
+
+displayBag()
