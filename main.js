@@ -206,9 +206,11 @@ function displayBag() {
             // let amount = item.amount
             // options[amount] = `<option value='${amount}' selected="selected">${amount}</option>`
             // console.log(options)
+            console.log(item.type, item.type.toLowerCase())
+            let imgName = item.type.toLowerCase()
             cartContainer.innerHTML += `
             <div class="cart-card-container">
-                <img src="assets/${item.type.toLowerCase()}.png" alt="${item.type}" />
+                <img src="assets/${imgName}.png" alt="${item.type}" />
 
                  <div class="cart-card-content">
                     <h3>${item.type}, ${item.glaze}</h3>
