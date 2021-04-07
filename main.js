@@ -274,9 +274,16 @@ function removeItem(itemName, i, bagItems) {
             // console.log(typeof(itemName))
             // console.log(localStorage.getItem('Original3'))
             // console.log(bagItems)
+            let deleteAmount = parseInt(bagItems[itemName].amount)
             delete bagItems[itemName]
             // console.log(bagItems)
             localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
+
+            let amount = parseInt(localStorage.getItem('bagAmount'))
+            // console.log(amount, deleteAmount, amount-deleteAmount)
+            localStorage.setItem("bagAmount", JSON.stringify(amount - deleteAmount))
+            document.getElementById('bag-val').textContent = amount-deleteAmount
+
             orderSummary(bagItems)
 
         })
