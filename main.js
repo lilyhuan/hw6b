@@ -208,7 +208,7 @@ function displayBag() {
             // console.log(options)
             cartContainer.innerHTML += `
             <div class="cart-card-container">
-                <img src="assets/${item.type}.png" alt="${item.type}" />
+                <img src="assets/${item.type.toLowerCase()}.png" alt="${item.type}" />
 
                  <div class="cart-card-content">
                     <h3>${item.type}, ${item.glaze}</h3>
