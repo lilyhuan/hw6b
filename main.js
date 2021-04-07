@@ -81,6 +81,7 @@ function itemDetails() {
     return item
 }
 
+// add selected item to bag in local storage
 function addItemToBag(item) {
     let bagItems = JSON.parse(localStorage.getItem('itemsInBag'))
     
@@ -159,25 +160,22 @@ function onLoadBag() {
         document.getElementById('bag-val').textContent = amount
     }
 }
+
 onLoadBag()
 
 
 
-// Cart page
+// ===================================== Cart page ===================================== //
+
+// updates amount of an item and all dependencies (cost and order summary)
 function updateAmount(index, type) {
-    let selectID = "amount" + index
+    // item name in local storage
     let itemName = type + index
     let newAmount = document.getElementById(`amount${index}`).value
     let bagItems = JSON.parse(localStorage.getItem('itemsInBag'))
-    // console.log(selectID)
-    // console.log(newAmount)
     var item = bagItems[itemName]
-    item.amount = newAmount
-    // console.log(bagItems[itemName].amount)
-    // bagItems[itemName].amount = newAmount
-    // console.log(item)
 
-    // let item = {"glaze":glaze, "amount":amount, "type": type, "cost": cost}
+    item.amount = newAmount
 
     bagItems = {
         ...bagItems,
@@ -185,30 +183,31 @@ function updateAmount(index, type) {
     }
 
     localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
+
+    // update cost of item
     document.getElementById(`cost${index}`).textContent = "$" + newAmount * item.cost
 
+    // update order summary
     orderSummary(bagItems)
 }
 
-
+// display the bag content
 function displayBag() {
     let bagItems = JSON.parse(localStorage.getItem('itemsInBag'))
 
     // check if on bag page
-    let cartContainer = document.querySelector(".order-container")
+    let orderContainer = document.querySelector(".order-container")
 
-    if (bagItems && cartContainer) {
+    // if bag items exist and on cart page
+    if (bagItems && orderContainer) {
+        // remove empty bag tag
+        document.getElementById("emptyBag").remove()
+        
+        // inserts item cards into HTML
         Object.values(bagItems).map((item, index) => {
-    //         var options = {"1":"<option value='1'>1</option>",
-    // "3": "<option value='3'>3</option>",
-    // "6":"<option value='6'>6</option>",
-    // "12": "<option value='12'>12</option>"}
-            // let amount = item.amount
-            // options[amount] = `<option value='${amount}' selected="selected">${amount}</option>`
-            // console.log(options)
-            console.log(item.type, item.type.toLowerCase())
+            // make sure img name is matches assets/image name
             let imgName = item.type.toLowerCase()
-            cartContainer.innerHTML += `
+            orderContainer.innerHTML += `
             <div class="cart-card-container">
                 <img src="assets/${imgName}.png" alt="${item.type}" />
 
@@ -229,75 +228,63 @@ function displayBag() {
              <span class="delete">&times;</span>
             </div>
             `
-            // console.log(id)
-            // console.log(document.querySelector(`option[value="${item.amount}"]`))
-            // document.querySelector(`option[value="${item.amount}"]`)
         })
 
+        // sets select tag to correct amount
         Object.values(bagItems).map((item, index) => {
             let sel = document.getElementById(`amount${index}`)
-                let opts = sel.options
-                for (var opt, i = 0; opt = opts[i]; i++) {
-                    if (opt.value == item.amount) {
-                        opts.selectedIndex = i;
-                    }
+            let opts = sel.options
+            for (var opt, i = 0; opt = opts[i]; i++) {
+                if (opt.value == item.amount) {
+                    opts.selectedIndex = i;
                 }
-                // console.log(opts)
+            }
         })
+
+        // enables x button to delete item
         Object.keys(bagItems).map((itemName, index) => {
             removeItem(itemName, index, bagItems)
         })
-        // removeItem(bagItems)
+
+        // sets order summary card
         orderSummary(bagItems)
-    }
+    } 
 }
 
-// function removeItem(bagItems) {
-//     let remove = document.getElementsByClassName('delete')
-//     for (var i = 0; i < remove.length; i++) {
-//         var btn = remove[i]
-//         btn.addEventListener('click', function(event) {
-//             var btnClicked = event.target
-//             btnClicked.parentElement.remove()
-//             // localStorage.removeItem()
-//             console.log(bagItems)
-//         })
-//     }
-// }
+displayBag()
 
+// deletes corresponding item when x is hit
 function removeItem(itemName, i, bagItems) {
     let remove = document.getElementsByClassName('delete')
-        var btn = remove[i]
-        btn.addEventListener('click', function(event) {
-            var btnClicked = event.target
-            btnClicked.parentElement.remove()
-            // localStorage.removeItem(itemName)
-            // console.log(localStorage.getItem(`${itemName}`))
-            // console.log(typeof(itemName))
-            // console.log(localStorage.getItem('Original3'))
-            // console.log(bagItems)
-            let deleteAmount = parseInt(bagItems[itemName].amount)
-            delete bagItems[itemName]
-            // console.log(bagItems)
-            localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
+    var btn = remove[i]
+    btn.addEventListener('click', function(event) {
+        var btnClicked = event.target
+        btnClicked.parentElement.remove()
 
-            let amount = parseInt(localStorage.getItem('bagAmount'))
-            // console.log(amount, deleteAmount, amount-deleteAmount)
-            localStorage.setItem("bagAmount", JSON.stringify(amount - deleteAmount))
-            document.getElementById('bag-val').textContent = amount-deleteAmount
+        let deleteAmount = parseInt(bagItems[itemName].amount)
+        delete bagItems[itemName]
+        localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
 
-            orderSummary(bagItems)
+        // update bag display
+        let amount = parseInt(localStorage.getItem('bagAmount'))
+        localStorage.setItem("bagAmount", JSON.stringify(amount - deleteAmount))
+        document.getElementById('bag-val').textContent = amount-deleteAmount
 
-        })
+        // update order summary since item was deleted
+        orderSummary(bagItems)
+    })
     
 }
 
+// sets order summary to have correct values
 function orderSummary(bagItems) {
+    // find cost of all rolls
     var rollTotal = 0
     Object.values(bagItems).map((item) => {
         rollTotal = rollTotal + (item.cost * item.amount)
     })
 
+    // sets floats to 2 decimal places
     rollTotal = rollTotal.toFixed(2)
     let tax = (rollTotal * .07).toFixed(2)
     let subtotal = parseFloat(tax) + parseFloat(rollTotal)
@@ -305,8 +292,5 @@ function orderSummary(bagItems) {
     document.getElementById("rollTotal").innerText = "$" + rollTotal
     document.getElementById("tax").innerText = "$" + tax
     document.getElementById("subtotal").innerText = "$" + subtotal
-
 }
 
-
-displayBag()
