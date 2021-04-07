@@ -75,8 +75,9 @@ function itemDetails() {
     let glaze = document.getElementById('glaze-selected').children[1].textContent
     let amount = document.getElementById('amount-selected').children[0].textContent
     let type = document.getElementById('type').textContent
+    let cost = document.getElementById('cost').textContent.substring(1)
 
-    let item = {"glaze":glaze, "amount":amount, "type": type}
+    let item = {"glaze":glaze, "amount":amount, "type": type, "cost": cost}
     return item
 }
 
@@ -91,7 +92,8 @@ function addItemToBag(item) {
             [itemName]: item
         }
     } else {
-        bagItems = { [item.type]: item }
+        let itemName = item.type + "0"
+        bagItems = { [itemName]: item }
     }
     localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
 }
@@ -162,6 +164,31 @@ onLoadBag()
 
 
 // Cart page
+function updateAmount(index, type) {
+    let selectID = "amount" + index
+    let itemName = type + index
+    let newAmount = document.getElementById(`amount${index}`).value
+    let bagItems = JSON.parse(localStorage.getItem('itemsInBag'))
+    // console.log(selectID)
+    // console.log(newAmount)
+    var item = bagItems[itemName]
+    item.amount = newAmount
+    // console.log(bagItems[itemName].amount)
+    // bagItems[itemName].amount = newAmount
+    // console.log(item)
+
+    // let item = {"glaze":glaze, "amount":amount, "type": type, "cost": cost}
+
+    bagItems = {
+        ...bagItems,
+        [itemName]: item
+    }
+
+    localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
+    document.getElementById(`cost${index}`).textContent = "$" + newAmount * item.cost
+}
+
+
 function displayBag() {
     let bagItems = JSON.parse(localStorage.getItem('itemsInBag'))
 
@@ -183,11 +210,11 @@ function displayBag() {
 
                  <div class="cart-card-content">
                     <h3>${item.type}, ${item.glaze}</h3>
-                    <p>$4.99</p>
+                    <p id="cost${index}">$${item.cost*item.amount}</p>
 
                     <label for="amount${index}"></label>
 
-                    <select name="amount${index}" id="amount${index}">
+                    <select name="amount${index}" id="amount${index}" onchange="updateAmount(${index}, '${item.type}')">
                         <option value="1">1</option>
                         <option value="3">3</option>
                         <option value="6">6</option>
@@ -211,30 +238,30 @@ function displayBag() {
                         opts.selectedIndex = i;
                     }
                 }
-                console.log(opts)
+                // console.log(opts)
         })
         Object.keys(bagItems).map((itemName, index) => {
-            removeItem2(itemName, index, bagItems)
+            removeItem(itemName, index, bagItems)
 
         })
         // removeItem(bagItems)
     }
 }
 
-function removeItem(bagItems) {
-    let remove = document.getElementsByClassName('delete')
-    for (var i = 0; i < remove.length; i++) {
-        var btn = remove[i]
-        btn.addEventListener('click', function(event) {
-            var btnClicked = event.target
-            btnClicked.parentElement.remove()
-            // localStorage.removeItem()
-            console.log(bagItems)
-        })
-    }
-}
+// function removeItem(bagItems) {
+//     let remove = document.getElementsByClassName('delete')
+//     for (var i = 0; i < remove.length; i++) {
+//         var btn = remove[i]
+//         btn.addEventListener('click', function(event) {
+//             var btnClicked = event.target
+//             btnClicked.parentElement.remove()
+//             // localStorage.removeItem()
+//             console.log(bagItems)
+//         })
+//     }
+// }
 
-function removeItem2(itemName, i, bagItems) {
+function removeItem(itemName, i, bagItems) {
     let remove = document.getElementsByClassName('delete')
         var btn = remove[i]
         btn.addEventListener('click', function(event) {
@@ -251,5 +278,10 @@ function removeItem2(itemName, i, bagItems) {
         })
     
 }
+
+function orderSummary() {
+    
+}
+
 
 displayBag()
