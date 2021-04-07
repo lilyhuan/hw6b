@@ -186,6 +186,8 @@ function updateAmount(index, type) {
 
     localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
     document.getElementById(`cost${index}`).textContent = "$" + newAmount * item.cost
+
+    orderSummary(bagItems)
 }
 
 
@@ -242,9 +244,9 @@ function displayBag() {
         })
         Object.keys(bagItems).map((itemName, index) => {
             removeItem(itemName, index, bagItems)
-
         })
         // removeItem(bagItems)
+        orderSummary(bagItems)
     }
 }
 
@@ -275,12 +277,26 @@ function removeItem(itemName, i, bagItems) {
             delete bagItems[itemName]
             // console.log(bagItems)
             localStorage.setItem("itemsInBag", JSON.stringify(bagItems))
+            orderSummary(bagItems)
+
         })
     
 }
 
-function orderSummary() {
-    
+function orderSummary(bagItems) {
+    var rollTotal = 0
+    Object.values(bagItems).map((item) => {
+        rollTotal = rollTotal + (item.cost * item.amount)
+    })
+
+    rollTotal = rollTotal.toFixed(2)
+    let tax = (rollTotal * .07).toFixed(2)
+    let subtotal = parseFloat(tax) + parseFloat(rollTotal)
+
+    document.getElementById("rollTotal").innerText = "$" + rollTotal
+    document.getElementById("tax").innerText = "$" + tax
+    document.getElementById("subtotal").innerText = "$" + subtotal
+
 }
 
 
